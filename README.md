@@ -1,2 +1,4 @@
 # Blinkit
-This is a clone of Blinkit E commerce
+This is a clone of Blinkit
+<br>
+E commerce
