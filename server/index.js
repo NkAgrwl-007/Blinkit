@@ -13,8 +13,8 @@ const app = express();
 
 app.use(
     cors({
-      origin: "http://localhost:5173", // Allow your frontend origin
-      credentials: true,              // Allow cookies to be sent
+      origin: "http://localhost:5173", 
+      credentials: true,              
     })
   );
 app.use(express.json());
@@ -26,7 +26,7 @@ app.use(helmet({
 
 const PORT = process.env.PORT || 8080;
 
-app.use("/api/auth", authRoutes); // Use the auth routes
+app.use("/api/auth", authRoutes); 
 
 app.get("/", (req, res) => {
     res.json({ message: "Server is running!" });
