@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from 'react';
 import axios from "axios";
 import "./Login.css";
 import logo from "../assets/blinkit-logo.png";
@@ -38,6 +39,12 @@ const Signup = () => {
       setMessage(error.response?.data?.message || "An error occurred");
     }
   };
+  useEffect(() => {
+    document.body.classList.add("login-signup");
+    return () => {
+      document.body.classList.remove("login-signup");
+    };
+  }, []);
 
   return (
     <div className="login-page">
@@ -101,9 +108,6 @@ const Signup = () => {
           Already have an account? <a href="/login">Login</a>
         </p>
       </div>
-      <footer className="footer">
-        <p>All Rights Reserved 2025</p>
-      </footer>
     </div>
   );
 };
