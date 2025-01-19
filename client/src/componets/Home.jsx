@@ -23,6 +23,11 @@ const Home = () => {
         <div className="search-bar">
           <input type="text" placeholder="Search 'groceries'" />
         </div>
+        <div className="add_product">
+           <Link to="/add-product" className="add-product-icon">
+            <img src={addIcon} alt="Add Product" />
+           </Link>
+        </div>
         <button className="cart-button">
           <img src={cart} alt="Cart" />
           My Cart
