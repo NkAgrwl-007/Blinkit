@@ -1,40 +1,27 @@
 import React, { useState, useEffect } from "react";
 import "./AddProduct.css";
+import { Link } from "react-router-dom";
+import logo from "../assets/blinkit-logo.png"; // Replace with actual logo path
+import cart from "../assets/cart.png"; // Replace with actual cart icon path
+import wideAssortment from "../assets/Wide_Assortment.png"; // Replace with actual image path
 
 const AddProduct = () => {
   const [productData, setProductData] = useState({
     name: "",
     description: "",
     image: null,
-    category: "",
-    subCategory: "",
   });
-  const [categories, setCategories] = useState([]);
-  const [subCategories, setSubCategories] = useState([]);
   const [previewImage, setPreviewImage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [username, setUsername] = useState("Guest");
 
-  // Fetch categories and subcategories from API
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await fetch("your-api-endpoint/categories"); // Replace with your API
-        const data = await response.json();
-        setCategories(data.categories || []);
-        setSubCategories(data.subCategories || []);
-      } catch (error) {
-        console.error("Error fetching categories:", error);
-      }
-    };
-
-    fetchCategories();
-  }, []);
-
+  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProductData((prev) => ({ ...prev, [name]: value }));
   };
 
+  // Handle image upload
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file && file.type.startsWith("image/")) {
@@ -48,14 +35,7 @@ const AddProduct = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validation
-    if (
-      !productData.name ||
-      !productData.description ||
-      !productData.image ||
-      !productData.category ||
-      !productData.subCategory
-    ) {
+    if (!productData.name || !productData.description || !productData.image) {
       alert("Please fill in all fields and upload an image!");
       return;
     }
@@ -64,95 +44,115 @@ const AddProduct = () => {
     formData.append("name", productData.name);
     formData.append("description", productData.description);
     formData.append("image", productData.image);
-    formData.append("category", productData.category);
-    formData.append("subCategory", productData.subCategory);
 
     setIsLoading(true);
+
     try {
-      const response = await fetch("your-api-endpoint", {
+      const response = await fetch("http://localhost:8080/api/products/add", {
         method: "POST",
         body: formData,
       });
-      const result = await response.json();
-      alert("Product uploaded successfully!");
-      console.log("Response:", result);
+
+      if (response.ok) {
+        const data = await response.json(); // Parse JSON if the response is valid
+        alert("Product added successfully!");
+      } else {
+        const errorText = await response.text(); // Read as text in case JSON is not available
+        alert(errorText || "Failed to add product");
+      }
     } catch (error) {
-      console.error("Error uploading product:", error);
-      alert("An error occurred while uploading the product.");
+      console.error("Error submitting product:", error);
+      alert("An error occurred. Please try again later.");
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="add-product">
-      <h2>Upload Product</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Name</label>
-          <input
-            type="text"
-            name="name"
-            value={productData.name}
-            onChange={handleChange}
-            placeholder="Enter product name"
-          />
+    <div className="add-product-page">
+      {/* Header */}
+      <header className="header">
+        <img src={logo} alt="Logo" className="logo" />
+        <div className="search-bar">
+          <input type="text" placeholder="Search 'groceries'" />
         </div>
-        <div className="form-group">
-          <label>Description</label>
-          <input
-            type="text"
-            name="description"
-            value={productData.description}
-            onChange={handleChange}
-            placeholder="Enter product description"
-          />
-        </div>
-        <div className="form-group">
-          <label>Image</label>
-          <input type="file" onChange={handleImageUpload} />
-          {previewImage && (
+        <div className="header-actions">
+          <button className="cart-button">
+            <img src={cart} alt="Cart" />
+            My Cart
+          </button>
+          <Link to="/add" className="add-product-icon">
             <img
-              src={previewImage}
-              alt="Preview"
-              className="image-preview"
+              src={wideAssortment}
+              alt="Wide Assortment"
+              className="wide-assortment"
             />
-          )}
+          </Link>
         </div>
-        <div className="form-group">
-          <label>Category</label>
-          <select
-            name="category"
-            value={productData.category}
-            onChange={handleChange}
-          >
-            <option value="">Select Category</option>
-            {categories.map((cat) => (
-              <option key={cat.id} value={cat.name}>
-                {cat.name}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="form-group">
-          <label>Sub Category</label>
-          <select
-            name="subCategory"
-            value={productData.subCategory}
-            onChange={handleChange}
-          >
-            <option value="">Select Sub Category</option>
-            {subCategories.map((subCat) => (
-              <option key={subCat.id} value={subCat.name}>
-                {subCat.name}
-              </option>
-            ))}
-          </select>
-        </div>
-        <button type="submit" className="submit-button" disabled={isLoading}>
-          {isLoading ? "Submitting..." : "Submit"}
-        </button>
-      </form>
+      </header>
+
+      <div className="content">
+        {/* Side Panel */}
+        <aside className="side-panel">
+          <div className="welcome-container">
+            <span className="welcome-text">Welcome</span>
+          </div>
+
+          <nav>
+            <ul>
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/add">Add Product</Link></li>
+              <li><Link to="/login">Profile</Link></li>
+              <li><Link to="/login">Logout</Link></li>
+            </ul>
+          </nav>
+        </aside>
+
+        {/* Add Product Form */}
+        <main className="main-content">
+          <h2>Upload Product</h2>
+          <form onSubmit={handleSubmit} className="add-product-form">
+            <div className="form-group">
+              <label>Name</label>
+              <input
+                type="text"
+                name="name"
+                value={productData.name}
+                onChange={handleChange}
+                placeholder="Enter product name"
+              />
+            </div>
+            <div className="form-group">
+              <label>Description</label>
+              <input
+                type="text"
+                name="description"
+                value={productData.description}
+                onChange={handleChange}
+                placeholder="Enter product description"
+              />
+            </div>
+            <div className="form-group">
+              <label>Image</label>
+              <input type="file" onChange={handleImageUpload} />
+              {previewImage && (
+                <img
+                  src={previewImage}
+                  alt="Preview"
+                  className="image-preview"
+                />
+              )}
+            </div>
+            <button
+              type="submit"
+              className="submit-button"
+              disabled={isLoading}
+            >
+              {isLoading ? "Submitting..." : "Submit"}
+            </button>
+          </form>
+        </main>
+      </div>
     </div>
   );
 };

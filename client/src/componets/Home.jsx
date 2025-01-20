@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "./Home.css";
 import logo from "../assets/blinkit-logo.png";
 import banner from "../assets/banner.jpg";
 import cart from "../assets/cart.png";
+import wideAssortment from "../assets/Wide_Assortment.png";
 
 const Home = () => {
-  const [categories, setCategories] = useState([]);
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    // Replace the URL with your API endpoint
-    fetch("http://localhost:5174/api/categories")
+    // Fetch products data from the backend
+    fetch("http://localhost:8080/api/products") // Adjust the URL for your API
       .then((response) => response.json())
-      .then((data) => setCategories(data))
-      .catch((error) => console.error("Error fetching categories:", error));
+      .then((data) => {
+        console.log("Fetched products:", data); // Debugging log
+        setProducts(data);
+      })
+      .catch((error) => console.error("Error fetching products:", error));
   }, []);
 
   return (
@@ -23,38 +28,48 @@ const Home = () => {
         <div className="search-bar">
           <input type="text" placeholder="Search 'groceries'" />
         </div>
-        <div className="add_product">
-           <Link to="/add-product" className="add-product-icon">
-            <img src={addIcon} alt="Add Product" />
-           </Link>
+        <div className="header-actions">
+          <button className="cart-button">
+            <img src={cart} alt="Cart" />
+            My Cart
+          </button>
+          <Link to="/add" className="add-product-icon">
+            <img
+              src={wideAssortment}
+              alt="Wide Assortment"
+              className="wide-assortment"
+            />
+          </Link>
         </div>
-        <button className="cart-button">
-          <img src={cart} alt="Cart" />
-          My Cart
-        </button>
       </header>
 
       {/* Banner Section */}
       <main className="main-content">
         <img src={banner} alt="Banner" className="banner" />
-        <h1>Welcome to Blinkit</h1>
-        <p>Your one-stop shop for fresh groceries and essentials.</p>
       </main>
 
-      {/* Categories Section */}
-      <div className="categories">
-        <h2>Shop by Category</h2>
-        <div className="category-list">
-          {categories.map((category, index) => (
-            <div className="category-card" key={index}>
-              <img
-                src={`./assets/${category.image}`}
-                alt={category.name}
-                className="category-image"
-              />
-              <p className="category-name">{category.name}</p>
-            </div>
-          ))}
+      {/* Products Section */}
+      <div className="product-list">
+        <h2>Products</h2>
+        <div className="product-cards">
+          {products.map((product) => {
+            const imageUrl = product.image;
+            return (
+              <div key={product._id} className="product-card">
+                <img
+                  src={imageUrl}
+                  alt={product.name}
+                  className="product-image"
+                  onError={(e) => {
+                    e.target.style.display = "none";
+                  }}
+                />
+                <p className="product-name">{product.name}</p>
+                <p className="product-price">₹{product.description}</p>
+                <button className="add-button">ADD</button>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
