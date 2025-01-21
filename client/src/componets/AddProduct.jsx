@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./AddProduct.css";
 import { Link } from "react-router-dom";
-import logo from "../assets/blinkit-logo.png"; // Replace with actual logo path
-import cart from "../assets/cart.png"; // Replace with actual cart icon path
-import wideAssortment from "../assets/Wide_Assortment.png"; // Replace with actual image path
+import logo from "../assets/blinkit-logo.png";
+import cart from "../assets/cart.png";
+import wideAssortment from "../assets/Wide_Assortment.png";
 
 const AddProduct = () => {
   const [productData, setProductData] = useState({
@@ -15,13 +15,11 @@ const AddProduct = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [username, setUsername] = useState("Guest");
 
-  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProductData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Handle image upload
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file && file.type.startsWith("image/")) {
@@ -54,10 +52,10 @@ const AddProduct = () => {
       });
 
       if (response.ok) {
-        const data = await response.json(); // Parse JSON if the response is valid
+        const data = await response.json();
         alert("Product added successfully!");
       } else {
-        const errorText = await response.text(); // Read as text in case JSON is not available
+        const errorText = await response.text();
         alert(errorText || "Failed to add product");
       }
     } catch (error) {
@@ -70,7 +68,6 @@ const AddProduct = () => {
 
   return (
     <div className="add-product-page">
-      {/* Header */}
       <header className="header">
         <img src={logo} alt="Logo" className="logo" />
         <div className="search-bar">
@@ -92,12 +89,10 @@ const AddProduct = () => {
       </header>
 
       <div className="content">
-        {/* Side Panel */}
         <aside className="side-panel">
           <div className="welcome-container">
             <span className="welcome-text">Welcome</span>
           </div>
-
           <nav>
             <ul>
               <li><Link to="/">Home</Link></li>
@@ -108,7 +103,6 @@ const AddProduct = () => {
           </nav>
         </aside>
 
-        {/* Add Product Form */}
         <main className="main-content">
           <h2>Upload Product</h2>
           <form onSubmit={handleSubmit} className="add-product-form">
