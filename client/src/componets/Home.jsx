@@ -125,7 +125,7 @@ const Home = () => {
                   <p className="product-name">{product.name}</p>
                   <p className="product-description">{product.description}</p>
                   <div className="product-actions">
-                    <p className="product-price">₹{product.price}</p>
+                    <p className="product-price">₹{product.description}</p>
                     <button className="add-button" onClick={() => addToCart(product)}>
                       Add to Cart
                     </button>
@@ -156,7 +156,7 @@ const Home = () => {
                 <img src={item.image || "/placeholder.svg"} alt={item.name} className="cart-item-image" />
                 <div className="cart-item-details">
                   <p className="cart-item-name">{item.name}</p>
-                  <p className="cart-item-price">₹{item.price}</p>
+                  <p className="cart-item-price">₹{item.description}</p>
                   <div className="quantity-controls">
                     <button className="quantity-button" onClick={() => decreaseQuantity(item._id)}>-</button>
                     <span>{item.quantity}</span>
