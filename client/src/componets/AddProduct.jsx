@@ -9,6 +9,7 @@ const AddProduct = () => {
   const [productData, setProductData] = useState({
     name: "",
     description: "",
+    price: "",  // Initialize price as an empty string
     image: null,
   });
   const [previewImage, setPreviewImage] = useState(null);
@@ -33,7 +34,7 @@ const AddProduct = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!productData.name || !productData.description || !productData.image) {
+    if (!productData.name || !productData.description || !productData.image || !productData.price) {
       alert("Please fill in all fields and upload an image!");
       return;
     }
@@ -41,6 +42,7 @@ const AddProduct = () => {
     const formData = new FormData();
     formData.append("name", productData.name);
     formData.append("description", productData.description);
+    formData.append("price", productData.price); // Ensure price is appended
     formData.append("image", productData.image);
 
     setIsLoading(true);
@@ -117,13 +119,23 @@ const AddProduct = () => {
               />
             </div>
             <div className="form-group">
-              <label>Description</label>
+              <label>Weight</label>
               <input
                 type="text"
                 name="description"
                 value={productData.description}
                 onChange={handleChange}
-                placeholder="Enter product description"
+                placeholder="Enter product weight"
+              />
+            </div>
+            <div className="form-group">
+              <label>Price</label>
+              <input
+                type="number"
+                name="price"
+                value={productData.price}
+                onChange={handleChange}
+                placeholder="Enter product price"
               />
             </div>
             <div className="form-group">

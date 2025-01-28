@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import logo from "../assets/blinkit-logo.png";
 import cart from "../assets/cart.png";
@@ -9,10 +9,8 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
-  
-  const navigate = useNavigate(); // Initialize navigate
-  
-  // Dynamically set the body class
+  const navigate = useNavigate();
+
   useEffect(() => {
     document.body.classList.add("login-signup");
     return () => {
@@ -30,11 +28,9 @@ const Login = () => {
 
       setMessage(response.data.message);
 
-      // If login is successful, redirect to the home page
       if (response.status === 200) {
-        navigate("/"); // Redirect to the home page
+        navigate("/");
       }
-
     } catch (error) {
       setMessage(error.response?.data?.message || "An error occurred");
     }

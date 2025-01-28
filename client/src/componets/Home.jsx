@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; // Import useNavigate here
 import "./Home.css";
 import logo from "../assets/blinkit-logo.png";
 import banner from "../assets/banner.jpg";
@@ -8,6 +8,7 @@ import wideAssortment from "../assets/Wide_Assortment.png";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
+  const navigate = useNavigate(); // Initialize useNavigate
 
   useEffect(() => {
     // Fetch products data from the backend
@@ -20,26 +21,28 @@ const Home = () => {
       .catch((error) => console.error("Error fetching products:", error));
   }, []);
 
+  const handleClick = () => {
+    navigate('/login'); // This redirects to the /login route
+  };
+
   return (
     <div className="home-page">
       {/* Header Section */}
       <header className="header">
-        <img src={logo} alt="Logo" className="logo" />
+        <img src={logo} alt="Blinkit Logo" className="logo" />
+        <div className="delivery-info">
+          <strong>Delivery in 12 minutes</strong>
+          <span>Mathura, Uttar Pradesh, India</span>
+        </div>
         <div className="search-bar">
-          <input type="text" placeholder="Search 'groceries'" />
+          <input type="text" placeholder='Search "paneer"' />
         </div>
         <div className="header-actions">
+          <button className="login-button" onClick={handleClick}>Login</button>
           <button className="cart-button">
             <img src={cart} alt="Cart" />
             My Cart
           </button>
-          <Link to="/add" className="add-product-icon">
-            <img
-              src={wideAssortment}
-              alt="Wide Assortment"
-              className="wide-assortment"
-            />
-          </Link>
         </div>
       </header>
 
@@ -65,8 +68,13 @@ const Home = () => {
                   }}
                 />
                 <p className="product-name">{product.name}</p>
-                <p className="product-price">₹{product.description}</p>
-                <button className="add-button">ADD</button>
+                <p className="product-weight">
+                  {product.description}
+                </p>
+                <div className="product-actions">
+                  <p className="product-price">₹ {product.price}</p>
+                  <button className="add-button">ADD</button>
+                </div>
               </div>
             );
           })}
