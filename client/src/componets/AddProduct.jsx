@@ -98,6 +98,7 @@ const AddProduct = () => {
           <nav>
             <ul>
               <li><Link to="/">Home</Link></li>
+              <li><Link to="/add-category">Add Category</Link></li>
               <li><Link to="/add">Add Product</Link></li>
               <li><Link to="/login">Profile</Link></li>
               <li><Link to="/login">Logout</Link></li>
