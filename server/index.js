@@ -8,6 +8,7 @@ import connectDB from './config/connectDB.js';
 import authRoutes from './routes/authRoutes.js';
 import productRoutes from './routes/productRoutes.js';
 import categoryRoutes from './routes/categoryRoutes.js'; // Import category routes
+import subCategoryRoutes from './routes/subCategoryRoutes.js'; // Import subcategory routes
 
 dotenv.config();
 
@@ -31,6 +32,7 @@ app.use(
 app.use('/api/products', productRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/categories', categoryRoutes); // Add category routes here
+app.use('/api/subcategories', subCategoryRoutes); // Add subcategory routes here
 
 const PORT = process.env.PORT || 8080;
 

@@ -79,7 +79,7 @@ const Home = () => {
 
   return (
     <div className="home-page">
-     <header className="header">
+   <header className="header">
   <div className="left-section">
     <Link to="/">
       <img src={logo || "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-01-30%20014847-oJHYLXI7YuDgJdhet6UUtxhnZnr56z.png"} alt="Blinkit Logo" className="logo" />
@@ -102,6 +102,7 @@ const Home = () => {
     </button>
   </div>
 </header>
+
       <main className="main-content">
         <img src={banner || "/placeholder.svg"} alt="Banner" className="banner" />
 
@@ -116,7 +117,7 @@ const Home = () => {
             {categories.map((category) => (
               <div key={category._id} className="category-container">
                 <div className="category-card">
-                  <img src={`data:image/jpeg;base64,${category.image.data}`} className="category-image" />
+                  <img src={category.image || "/placeholder.svg"} className="category-image" />
                 </div>
               </div>
             ))}

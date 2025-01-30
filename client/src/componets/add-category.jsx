@@ -124,6 +124,9 @@ const AddCategory = () => {
                 <Link to="/add-category">Add Category</Link>
               </li>
               <li>
+                <Link to="/add-subcategory">Add SubCategory</Link>
+              </li>
+              <li>
                 <Link to="/login">Profile</Link>
               </li>
               <li>
@@ -141,26 +144,10 @@ const AddCategory = () => {
                 {categories.map((category) => (
                   <div key={category._id} className="category-card">
                     <img
-                      src={`data:image/jpeg;base64,${category.image.data}`}
+                      src={category.image}
                       alt={category.name}
                       className="category-image"
                     />
-                    <h3 className="category-name">{category.name}</h3>
-                    <p className="category-description">{category.description}</p>
-                    <div className="category-actions">
-                      <button
-                        className="edit-button"
-                        onClick={() => alert("Edit functionality coming soon!")}
-                      >
-                        Edit
-                      </button>
-                      <button
-                        className="delete-button"
-                        onClick={() => handleDelete(category._id)}
-                      >
-                        Delete
-                      </button>
-                    </div>
                   </div>
                 ))}
               </div>

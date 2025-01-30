@@ -80,13 +80,6 @@ const AddProduct = () => {
             <img src={cart} alt="Cart" />
             My Cart
           </button>
-          <Link to="/add" className="add-product-icon">
-            <img
-              src={wideAssortment}
-              alt="Wide Assortment"
-              className="wide-assortment"
-            />
-          </Link>
         </div>
       </header>
 
