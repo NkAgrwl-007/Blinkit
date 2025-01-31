@@ -1,10 +1,9 @@
 import mongoose from 'mongoose';
 
-const ProductSchema = new mongoose.Schema(
+const SubCategorySchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
-    description: { type: String },
-    price: { type: Number, required: true }, // Add price field
+    categoryId: { type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: true },
     image: {
       data: { type: String, required: true },
       contentType: { type: String, required: true },
@@ -13,4 +12,4 @@ const ProductSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model('Product', ProductSchema);
+export default mongoose.model('SubCategory', SubCategorySchema);

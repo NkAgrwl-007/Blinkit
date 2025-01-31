@@ -11,8 +11,9 @@ const convertBufferToBase64 = (buffer) => {
   return buffer.toString('base64');
 };
 
+// Add a new product
 router.post('/add', upload.single('image'), async (req, res) => {
-  const { name, description, category, subCategory } = req.body;
+  const { name, description, price } = req.body;
   const image = req.file;
 
   try {
@@ -21,8 +22,7 @@ router.post('/add', upload.single('image'), async (req, res) => {
     const newProduct = new Product({
       name,
       description,
-      category,
-      subCategory,
+      price, // Include the price in the schema
       image: {
         data: imageBase64,
         contentType: image.mimetype,
@@ -38,6 +38,7 @@ router.post('/add', upload.single('image'), async (req, res) => {
   }
 });
 
+// Get all products
 router.get('/', async (req, res) => {
   try {
     const products = await Product.find();
@@ -54,6 +55,7 @@ router.get('/', async (req, res) => {
   }
 });
 
+// Get product image by ID
 router.get('/product-image/:id', async (req, res) => {
   const { id } = req.params;
 
