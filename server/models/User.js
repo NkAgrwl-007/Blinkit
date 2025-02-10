@@ -10,6 +10,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    isAdmin: {
+        type: Boolean,
+        default: false,  // Default is normal user, set to true for admins
+    },
 });
 
 const User = mongoose.model('User', userSchema);

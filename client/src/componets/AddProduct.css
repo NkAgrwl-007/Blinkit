@@ -29,7 +29,7 @@ body.home {
 }
 
 .logo {
-  height: 200px; /* Increased logo size */
+  height: 100px ; /* Increased logo size */
   width: auto;
 }
 
@@ -342,4 +342,27 @@ body.home {
   text-align: left;
   margin: 20px 0;
   padding-left: 10px;
+}
+.blob-message {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 20px 30px;
+  background-color: white;
+  color: #333;
+  border-radius: 50px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  font-size: 18px;
+  text-align: center;
+  max-width: 80%;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 400;
+}
+
+.blob-message p {
+  margin: 0;
 }
