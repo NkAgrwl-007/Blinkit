@@ -1,0 +1,223 @@
+/* Ensure body and html have no margin/padding */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0 !important;
+  overflow-x: hidden !important;
+}
+
+/* Prevent any shifting by ensuring container takes full height */
+.order-placed-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f9f9f9; /* Ensure a consistent background */
+}
+
+/* Header layout */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #fff;
+  position: sticky;
+  top: 0; /* Fix the header on top to prevent shifting */
+  z-index: 100;
+}
+
+/* Left section within header */
+.header .left-section {
+  display: flex;
+  align-items: center;
+}
+
+/* Adjusting search bar spacing */
+.header .search-bar {
+  flex: 1;
+  margin: 0 20px;
+}
+
+/* Main content area */
+.order-summary-container {
+  flex: 1;
+  padding: 30px;
+  background-color: #f9f9f9;
+}
+
+/* Order details section */
+.order-details-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+/* Order confirmation styling */
+.order-confirmation {
+  text-align: center;
+}
+
+.order-confirmation img {
+  max-width: 200px;
+  margin-bottom: 20px;
+}
+
+/* Order summary card */
+.order-summary-details {
+  margin-top: 30px;
+}
+
+.order-summary-card {
+  background-color: #f1f1f1;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+/* Order summary item styling */
+.order-summary-card .total,
+.order-summary-card .subtotal,
+.order-summary-card .shipping {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+/* Product list grid layout */
+.order-product-list {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  align-items: center;
+}
+
+/* Individual product card styling */
+.order-product-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.order-product-image {
+  width: 60%;
+  height: auto;
+  max-width: 150px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.order-product-info {
+  margin-top: 10px;
+  font-weight: 300;
+}
+
+.order-product-card h3 {
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.order-product-card p {
+  margin: 5px 0;
+  color: #555;
+}
+
+/* Track order button styling */
+.track-order-btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+  margin-top: 30px;
+}
+
+/* Button hover effect */
+.track-order-btn:hover {
+  background-color: #45a049;
+}
+
+/* Font size adjustments for summary */
+.subtotal,
+.shipping {
+  font-weight: 500;
+  font-size: 1.0rem;
+}
+
+.total {
+  font-weight: 800;
+  font-size: 1.5rem;
+}
+
+/* Invoice styling */
+.invoice-container {
+  background: white;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.invoice-container h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.invoice-container table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.invoice-container th,
+.invoice-container td {
+  padding: 12px;
+  text-align: left;
+}
+
+.invoice-container th {
+  background-color: #f1f1f1;
+}
+
+.invoice-container tbody tr {
+  border-bottom: 1px solid #eee;
+}
+
+.invoice-container tbody tr:last-child {
+  border-bottom: none;
+}
+.mb-6{
+  font-weight: 500;
+}
+/* Ensure the invoice is properly spaced after the track order button */
+.track-order-btn {
+  margin-bottom: 2rem;
+}
+.but{
+  background-color: #45a049;
+}
+
+/* Responsive styling for different screen sizes */
+@media (max-width: 1024px) {
+  .order-product-list {
+    grid-template-columns: repeat(3, 1fr); /* Adjust to 3 columns on medium screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .order-product-list {
+    grid-template-columns: 1fr; /* Adjust to 1 column on smaller screens */
+  }
+
+  .order-product-image {
+    width: 80%; /* Adjust image size on small screens */
+    height: auto;
+  }
+}

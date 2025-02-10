@@ -33,6 +33,7 @@ const Signup = () => {
       setMessage(response.data.message || "Signup successful!");
       
       if (response.status === 201 || response.data.success) {
+        localStorage.setItem("username", username);
         setTimeout(() => navigate("/login"), 500); 
       }
     } catch (error) {

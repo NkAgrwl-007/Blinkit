@@ -25,17 +25,34 @@ const Login = () => {
         email,
         password,
       });
-
+  
+      // Log the full response to see the structure
+      console.log("Response from server:", response.data);
+  
       setMessage(response.data.message);
-
+  
       if (response.status === 200) {
-        navigate("/");
+        if (response.data.user) {
+          const { isAdmin, email } = response.data.user;
+      
+          // Store the isAdmin flag and email in localStorage
+          localStorage.setItem("isAdmin", isAdmin);
+          localStorage.setItem("email", email);
+      
+          // Redirect the user after successful login
+          navigate("/");  // Redirect to the homepage or a protected route
+        } else {
+          setMessage("User data not found in the response");
+        }
       }
+      
     } catch (error) {
+      console.error("Error during login:", error);
       setMessage(error.response?.data?.message || "An error occurred");
     }
   };
-
+  
+  
   return (
     <div className="login-page">
       <header className="header">

@@ -7,8 +7,10 @@ import helmet from 'helmet';
 import connectDB from './config/connectDB.js';
 import authRoutes from './routes/authRoutes.js';
 import productRoutes from './routes/productRoutes.js';
-import categoryRoutes from './routes/categoryRoutes.js'; // Import category routes
-import subCategoryRoutes from './routes/subCategoryRoutes.js'; // Import subcategory routes
+import categoryRoutes from './routes/categoryRoutes.js';
+import subCategoryRoutes from './routes/subCategoryRoutes.js';
+import paymentRoutes from './routes/paymentRoutes.js'; // Import payment routes
+
 
 dotenv.config();
 
@@ -29,10 +31,13 @@ app.use(
   })
 );
 
+// Routes
 app.use('/api/products', productRoutes);
 app.use('/api/auth', authRoutes);
-app.use('/api/categories', categoryRoutes); // Add category routes here
-app.use('/api/subcategories', subCategoryRoutes); // Add subcategory routes here
+app.use('/api/categories', categoryRoutes);
+app.use('/api/subcategories', subCategoryRoutes);
+app.use('/api/payment', paymentRoutes); // Add payment routes here
+
 
 const PORT = process.env.PORT || 8080;
 

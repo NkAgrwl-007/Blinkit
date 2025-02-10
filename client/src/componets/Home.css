@@ -26,7 +26,7 @@ body {
 }
 
 .logo {
-  height: 200px; /* Significantly increased logo size */
+  height: 100px; /* Significantly increased logo size */
   width: auto;
 }
 
@@ -62,45 +62,74 @@ body {
   background-color: #f8f8f8;
   transition: all 0.2s ease;
 }
-
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 24px;
-  justify-self: end;
+  gap: 15px;
 }
 
-.cart-button {
+/* User section with profile image */
+.user-info {
   display: flex;
   align-items: center;
-  background-color: #008c45;
+  gap: 10px;
+  background: #f0f0f0;
+  padding: 6px 14px;
+  border-radius: 50px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  transition: 0.3s ease-in-out;
+}
+
+.user-info:hover {
+  background: #e0e0e0;
+}
+
+/* Profile Picture Styling */
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ccc;
+}
+
+/* Username styling */
+.username-display {
+  font-weight: 600;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Login & Cart Button Styling */
+.login-button,
+.cart-button {
+  background: #007bff;
+  color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 8px 14px;
   border-radius: 8px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
   font-weight: 500;
-  font-size: 14px;
-  color: #ffffff;
-  transition: background-color 0.2s ease;
-  white-space: nowrap;
+  transition: background 0.3s ease-in-out, transform 0.2s;
 }
 
-.cart-button img {
+.login-button:hover,
+.cart-button:hover {
+  background: #0056b3;
+  transform: scale(1.05);
+}
+
+/* Cart Icon Styling */
+.cart-icon {
+  width: 20px;
   height: 20px;
-  width: auto;
-  margin-right: 8px;
 }
 
-.login-button {
-  background-color: transparent;
-  border: none;
-  color: #1a1a1a;
-  font-weight: 500;
-  font-size: 14px;
-  padding: 10px 16px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
+
+
 /* Banner Section */
 .main-content {
   text-align: center;
@@ -295,6 +324,21 @@ body {
   justify-content: space-between;
 }
 
+.empty-cart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.empty-cart-image {
+  max-width: 110%;
+  max-height: 110%;
+  object-fit: contain;
+}
+
+
+
 .cart-container.open {
   transform: translateX(0);
 }
@@ -473,6 +517,61 @@ body {
     width: 100%;
     max-width: none;
   }
+}
+.home-page.blurred .main-content,
+.home-page.blurred .cart-container {
+  filter: blur(10px); /* Apply blur effect */
+  pointer-events: none; /* Disable interaction with blurred elements */
+}
+
+.confirmation-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white !important;/* Slightly transparent background */
+  padding: 20px;
+  border-radius: 10px;
+  z-index: 1000; /* Ensure it is above everything else */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* Flexbox layout to align items properly */
+
+
+.confirmation-gifs {
+  width: 450px !important;
+  height: auto;
+  filter: none; /* Keep the GIF clear without blur */
+}
+/* Control button styles */
+.control-button {
+  background-color: #28a745; /* Attractive green color */
+  color: white;
+  padding: 10px 20px;
+  border-radius: 25px; /* Rounded corners for a sleek look */
+  font-size: 14px; /* Smaller text size */
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-top: 10px; /* Add some space around the button */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.control-button:hover {
+  background-color: #218838; /* Slightly darker green when hovered */
+  transform: scale(1.05); /* Slight scale-up effect on hover */
+}
+
+.control-button:focus {
+  outline: none; /* Removes default focus outline */
+}
+
+/* Optional: Style for the button when clicked */
+.control-button:active {
+  transform: scale(0.98); /* Shrink effect on click */
 }
 
 @media (max-width: 480px) {
